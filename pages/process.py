@@ -13,6 +13,10 @@ column1 = dbc.Col(
         
             ## Process
 
+            #### About the Data
+
+            Voter data is available for free from the Somerset County Board of Elections. The particular dataset used here was requested in April of 2018, and exclusively covers the Green Brook, North Plainfield, and Manville municipalities. It includes all voters registered in those areas, and in addition to recording turnout for five elections from 2015-2017, the dataset features voters’ full names and street addresses.
+
 
             """
         ),

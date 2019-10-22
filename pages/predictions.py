@@ -14,6 +14,7 @@ column1 = dbc.Col(
             ## Predictions
 
 
+
             """
         ),
     ],

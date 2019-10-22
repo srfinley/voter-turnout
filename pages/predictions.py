@@ -12,10 +12,25 @@ column1 = dbc.Col(
             """
         
             ## Predictions
-
+            
 
 
             """
+        ),
+        dcc.Markdown("""##### Name"""),
+        dcc.Input(
+           placeholder="Your New Jerseyan",
+           type='text',
+           value=''
+        ),
+        dcc.Markdown("""##### Voting Record"""),
+        dcc.Checklist(
+             options=[
+                     {'label': '2015 Primary', 'value': '06/02/2015'},
+                     {'label': '2016 Primary', 'value': '06/07/2016'},
+                     {'label': '2016 General', 'value': '11/08/2016'},
+                     {'label': '2017 Primary', 'value': '06/06/2017'}
+             ],
         ),
     ],
     md=4,
@@ -23,8 +38,9 @@ column1 = dbc.Col(
 
 column2 = dbc.Col(
     [
-        
+        html.Div(id="summary")
     ]
 )
+
 
 layout = dbc.Row([column1, column2])

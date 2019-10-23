@@ -17,7 +17,7 @@ column1 = dbc.Col(
         dcc.Markdown(
             """
         
-            ## Predictions
+            # Make Predictions
             
 
 
@@ -93,19 +93,32 @@ column1 = dbc.Col(
 
 column2 = dbc.Col(
     [
-        html.Div(id="summary"),
-        html.H2('Odds of voting', className='mb-5'),
+        dcc.Markdown(
+            """
+            ## Tips 
+
+            The best way to increase your New Jerseyan’s chance of voting in _this_ election is to give them a history of voting in previous ones. It’s very difficult to get the model to guess that someone is likely to vote for the first time — I haven’t found a way to do it yet!
+
+            Note that in the date fields, single-digit days and months require a leading zero, e.g., 01/01/1950 instead of 1/1/1950. All years must be four digits.
+
+            It’s possible to make some pretty implausible combinations of features in this app — in particular, people who registered to vote before they were of legal age to do so. Some similarly implausible combinations exist in the original dataset, and likely reflect poor record-keeping. 
+            
+            ## Results
+            """),
+        html.Div(id="summary", className='lead'),
         html.Div(id='prediction-content', className='lead')
     ]
 )
 
 @app.callback(
-    Output('prediction-content', 'children'),
+    [Output('prediction-content', 'children'),Output('summary', 'children')],
     [Input('name', 'value'), Input('votes', 'value'), 
     Input('birthdate', 'date'), Input('reg_date', 'date'), 
     Input('sex', 'value'), Input('party', 'value'), Input('muni', 'value')],
 )
 def predict(name, votes, birthdate, reg_date, sex, party, muni):
+    # votes is a None before any buttons are pushed
+    # then becomes a list that contains the values of the pushed buttons
     if votes == None:
         pri15, pri16, gen16, pri17 = 0,0,0,0
         voter_score = 0
@@ -124,6 +137,30 @@ def predict(name, votes, birthdate, reg_date, sex, party, muni):
     rep = party == 'REP'
     una = party == 'UNA'
     oth = party == 'OTH'
+    # variables for writing the description of the New Jerseyan
+    p1 = "person of indeterminate gender"
+    p2 = "Somerset County"
+    p3 = "They are"
+    p4 = "not officially affiliated with any political party"
+    if male:
+        p1 = "man"
+        p3 = "He is"
+    if female:
+        p1 = "woman"
+        p3 = "She is"
+    if muni == 1:
+        p2 = "North Plainfield"
+    if muni == 2:
+        p2 = "Manville"
+    if muni == 3:
+        p2 = "Green Brook"
+    if dem:
+        p4 = "a registered Democrat"
+    if rep:
+        p4 = "a registered Republican"
+    if oth:
+        p4 = "registered with a third party"
+    # so it doesn't break if passed a None (muni should be 1, 2, or 3 per the model)
     if muni == None:
         muni = 1
     df = pd.DataFrame(
@@ -136,7 +173,8 @@ def predict(name, votes, birthdate, reg_date, sex, party, muni):
     )
     y_pred = pipeline.predict(df)[0]
     y_pred_proba = pipeline.predict_proba(df)[0][1]
-    return f"It's November 7th, 2017. {name} has a {(y_pred_proba*100):.2f}% chance of voting in the general election."
+    return [f"{name} has a {(y_pred_proba*100):.2f}% chance of voting in the general election.",
+            f"It's November 7th, 2017. {name} is a {age_2017}-year-old {p1} from {p2}, New Jersey. {p3} {p4}."]
 
 
 layout = dbc.Row([column1, column2])

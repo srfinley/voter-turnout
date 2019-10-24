@@ -24,12 +24,12 @@ column1 = dbc.Col(
             """
         ),
         dcc.Markdown("""##### Name"""),
-        dcc.Input(
+        html.Div([dcc.Input(
             id = 'name',
            placeholder="Your New Jerseyan",
            type='text',
            value='Michael'
-        ),
+        )], style={'marginBottom': '10px'}),
         dcc.Markdown("""##### Voting Record"""),
         dcc.Checklist(
             id = 'votes',
@@ -39,25 +39,26 @@ column1 = dbc.Col(
                      {'label': '2016 General', 'value': 'gen16'},
                      {'label': '2017 Primary', 'value': 'pri17'}
              ],
+             labelStyle={'margin-right': '10px'}
         ),
         dcc.Markdown("""##### Birthdate"""),
-        dcc.DatePickerSingle(
+        html.Div([dcc.DatePickerSingle(
             id='birthdate',
             number_of_months_shown=1,
             min_date_allowed=dt(1900, 1, 1),
             max_date_allowed=dt(1999, 11, 7),
             date=dt(1997, 5, 10)
-        ),
+        )], style={'marginBottom': '10px'}),
         dcc.Markdown("""##### Date of Most Recent Voter Registration"""),
-        dcc.DatePickerSingle(
+        html.Div([dcc.DatePickerSingle(
             id='reg_date',
             number_of_months_shown=1,
             min_date_allowed=dt(1900, 1, 1),
             max_date_allowed=dt(2018, 1, 1),
             date=dt(1997, 5, 10)
-        ),
+        )], style={'marginBottom': '10px'}),
         dcc.Markdown("""##### Gender"""),
-        dcc.Dropdown(
+        html.Div([dcc.Dropdown(
             id='sex',
             options=[
                 {'label': 'M', 'value': 'M'},
@@ -65,9 +66,9 @@ column1 = dbc.Col(
                 {'label': 'N', 'value': 'N'}
             ],
             value='N'
-        ),
+        )], style={'marginBottom': '10px'}),
         dcc.Markdown("""##### Party Affiliation"""),
-        dcc.Dropdown(
+        html.Div([dcc.Dropdown(
             id='party',
             options=[
                 {'label': 'Republican', 'value': 'REP'},
@@ -76,7 +77,7 @@ column1 = dbc.Col(
                 {'label': 'Unaffiliated', 'value': 'UNA'}
             ],
             value='UNA'
-        ),
+        )], style={'marginBottom': '10px'}),
         dcc.Markdown("""##### Municipality"""),
         dcc.Dropdown(
             id='muni',
@@ -93,20 +94,20 @@ column1 = dbc.Col(
 
 column2 = dbc.Col(
     [
+        dcc.Markdown("""## Results"""),
+        html.Div(id="summary", className='lead'),
+        html.Div(id='prediction-content', className='lead', style={'marginBottom': '10px'}),
         dcc.Markdown(
             """
-            ## Tips 
+            ### Tips 
 
             The best way to increase your New Jerseyan’s chance of voting in _this_ election is to give them a history of voting in previous ones. It’s very difficult to get the model to guess that someone is likely to vote for the first time — I haven’t found a way to do it yet!
 
-            Note that in the date fields, single-digit days and months require a leading zero, e.g., 01/01/1950 instead of 1/1/1950. All years must be four digits.
+            Note that in the date fields, single-digit days and months require a leading zero, e.g., 01/01/1950 instead of 1/1/1950. All years must be four digits. Do not input years prior to 1900.
 
-            It’s possible to make some pretty implausible combinations of features in this app — in particular, people who registered to vote before they were of legal age to do so. Some similarly implausible combinations exist in the original dataset, and likely reflect poor record-keeping. 
+            It’s possible to make some pretty implausible combinations of features in this app — in particular, people who registered to vote before they were of legal age to do so. Some similarly implausible combinations exist in the original dataset, where they likely reflect poor record-keeping. 
             
-            ## Results
-            """),
-        html.Div(id="summary", className='lead'),
-        html.Div(id='prediction-content', className='lead')
+            """),    
     ]
 )
 

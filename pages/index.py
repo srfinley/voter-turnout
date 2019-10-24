@@ -29,7 +29,9 @@ column1 = dbc.Col(
         dcc.Markdown(
             """
         
-            ## What's the point?
+            ## Predicting (un)likely voters
+
+            This app presents a theoretically generalizable model to predict turnout among registered voters based on prior voting record and demographic information available in public voter registration records. This specific implementation of the model is based on data from Somerset County, New Jersey, and is built to predict individuals’ turnout in the 2017 general election.
 
             Whether you want to identify likely or unlikely voters, whether you want to advertise or offer services where they are most needed, this app fits your needs.
 
@@ -39,10 +41,6 @@ column1 = dbc.Col(
     ],
     md=4,
 )
-
-#gapminder = px.data.gapminder()
-#fig = px.scatter(gapminder.query("year==2007"), x="gdpPercap", y="lifeExp", size="pop", color="continent",
-#           hover_name="country", log_x=True, size_max=60)
 
 column2 = dbc.Col(
     [

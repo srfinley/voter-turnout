@@ -21,6 +21,12 @@ column1 = dbc.Col(
 
             Who does vote? _Voters_ vote. 
 
+            """
+        ),
+        html.Div([dcc.Link(dbc.Button('Become a voter', color='primary'), href='https://www.usa.gov/register-to-vote')], style={'marginBottom': '10px'}),
+        dcc.Markdown(
+            """
+
             This seemingly tautological statement is borne out by the model. More than participation in any particular past election, more than age or party affiliation, having been a frequent voter in the past raises the odds of voting in the future.
 
 

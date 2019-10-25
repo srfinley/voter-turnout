@@ -31,7 +31,7 @@ column1 = dbc.Col(
         
             ## Who's going to vote?
 
-            This app presents a theoretically generalizable model to predict turnout among registered voters based on their publicly available prior voting record and demographic information. This model is based on data from Somerset County, New Jersey, and it predicts individuals’ turnout in the 2017 general election.
+            This app presents a theoretically generalizable model to predict turnout among registered voters based on their publicly available prior voting record and demographic information. The model is based on data from Somerset County, New Jersey, and it predicts individuals’ turnout in the 2017 general election.
 
             You can explore the model by seeing how the probability of an individual voting rises and falls as you change their characteristics.
             """

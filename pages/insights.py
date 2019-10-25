@@ -61,6 +61,14 @@ column1 = dbc.Col(
         dcc.Markdown(
             """
             The numbers (and corresponding colors) at each intersection correspond to the voting rate for each cell, defined by a combination of voter score and time since registration. On the far left side, among those with voter scores of zero, time since registration makes very little difference to that solid wall of purple, but with each successive voter score increase, there is a greater range of colors across the spectrum of “since_reg” scores — meaning, the effect that time since registration has is primarily on voters with high voter scores.
+            
+            #### Thinking broadly
+
+            Predicting things that already happened in one small place is easy mode. How well can we expect the model to generalize?
+
+            Aside from municipality — a feature of marginal importance — none of the model inputs are specific to Somerset County. By excluding that, or refitting the model to accept a longer list of possible municipalities, we could easily end up with a model that would produce high-quality turnout predictions for an arbitrarily large swath of the United States.
+
+            What about other elections? As a target, the election I chose has some specific qualities: it was a general election rather than a primary, and an off-year election (in New Jersey, most notably for the governorship and state legislature) rather than a true midterm or presidential election. Nevertheless, I believe the general principles behind the model are sound and broadly applicable. Voter score matters. For a general election, voting in the associated primary matters, as well as the preceding general. What matters most in a primary? In a presidential election? The model doesn’t directly answer these questions.
             """
         ),
     ],
